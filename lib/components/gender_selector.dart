@@ -3,14 +3,20 @@ import 'package:icmp/core/app_colors.dart';
 import 'package:icmp/core/text_style.dart';
 
 class GenderSelector extends StatefulWidget {
-  const GenderSelector({super.key});
+  final String selectedGender;
+  final Function(String) onGenderSelected;
+
+  const GenderSelector({
+    super.key,
+    required this.selectedGender,
+    required this.onGenderSelected,
+  });
 
   @override
   State<GenderSelector> createState() => _GenderSelectorState();
 }
 
 class _GenderSelectorState extends State<GenderSelector> {
-  String? _selectedGender;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,9 +25,7 @@ class _GenderSelectorState extends State<GenderSelector> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              setState(() {
-                _selectedGender = "Hombre";
-              });
+              widget.onGenderSelected("Hombre");
             },
             child: Padding(
               padding: const EdgeInsets.only(
@@ -32,7 +36,7 @@ class _GenderSelectorState extends State<GenderSelector> {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: _selectedGender == "Hombre"
+                  color: widget.selectedGender == "Hombre"
                       ? AppColor.backgroundComponentSelected
                       : AppColor.backgroundComponent,
                   borderRadius: BorderRadius.circular(10),
@@ -41,7 +45,11 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/hombre.png", height: 100),
+                      Image.asset(
+                        "assets/images/hombre.png",
+                        height: 100,
+                        color: Colors.white,
+                      ),
                       SizedBox(height: 10),
                       Text("Hombre", style: TextStyles.bodyText),
                     ],
@@ -55,9 +63,7 @@ class _GenderSelectorState extends State<GenderSelector> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              setState(() {
-                _selectedGender = "Mujer";
-              });
+              widget.onGenderSelected("Mujer");
             },
             child: Padding(
               padding: const EdgeInsets.only(
@@ -68,7 +74,7 @@ class _GenderSelectorState extends State<GenderSelector> {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: _selectedGender == "Mujer"
+                  color: widget.selectedGender == "Mujer"
                       ? AppColor.backgroundComponentSelected
                       : AppColor.backgroundComponent,
                   borderRadius: BorderRadius.circular(10),
@@ -77,7 +83,11 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/mujer.png", height: 100),
+                      Image.asset(
+                        "assets/images/mujer.png",
+                        height: 100,
+                        color: Colors.white,
+                      ),
                       SizedBox(height: 10),
                       Text("Mujer", style: TextStyles.bodyText),
                     ],

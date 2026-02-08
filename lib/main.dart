@@ -16,7 +16,10 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColor.primary,
           foregroundColor: Color(0xFFFFFFFF),
-          title: Text("ICMP APP"),
+          title: Text(
+            "ICMP APP",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         backgroundColor: AppColor.background,
         body: ImcpHomeScreen(),

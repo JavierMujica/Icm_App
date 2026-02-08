@@ -3,15 +3,20 @@ import 'package:icmp/core/app_colors.dart';
 import 'package:icmp/core/text_style.dart';
 
 class HeigthSelector extends StatefulWidget {
-  const HeigthSelector({super.key});
+  final double heigth;
+  final Function(double) onHeigthChange;
+
+  const HeigthSelector({
+    super.key,
+    required this.heigth,
+    required this.onHeigthChange,
+  });
 
   @override
   State<HeigthSelector> createState() => _HeigthSelectorState();
 }
 
 class _HeigthSelectorState extends State<HeigthSelector> {
-  double _heigth = 170;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +31,7 @@ class _HeigthSelectorState extends State<HeigthSelector> {
             SizedBox(height: 8),
             Text("Altura", style: TextStyles.bodyText),
             Text(
-              "${_heigth.toStringAsFixed(0)} cm",
+              "${widget.heigth.toStringAsFixed(0)} cm",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -34,16 +39,14 @@ class _HeigthSelectorState extends State<HeigthSelector> {
               ),
             ),
             Slider(
-              value: _heigth,
-              onChanged: (value) {
-                setState(() {
-                  _heigth = value;
-                });
+              value: widget.heigth,
+              onChanged: (newHeigth) {
+                widget.onHeigthChange(newHeigth);
               },
               min: 100,
               max: 250,
               divisions: 150,
-              label: ("${_heigth.toStringAsFixed(0)}"),
+              label: (widget.heigth.toStringAsFixed(0)),
               activeColor: AppColor.primary,
             ),
           ],
